@@ -1,10 +1,15 @@
 <template>
-    <div>123123</div>
+    <div>
+        <data-form></data-form>
+    </div>
 </template>
 
 <script>
+import dataForm from '@/components/dataForm'
 export default {
-    
+    components: {
+        dataForm
+    }
 }
 </script>
 
