@@ -8,6 +8,8 @@
 <script>
 import dataForm from '@/components/dataForm'
 import { Button } from 'vant'
+import { getQueryString, getCode } from '../../utils'
+import { getOpenId } from '../../services/weixin'
 export default {
     components: {
         dataForm,
@@ -34,6 +36,17 @@ export default {
                 }
             ],
             allData: {}
+        }
+    },
+    beforeCreate() {
+        const code = getQueryString('code')
+        if (!code) {
+            getCode()
+            return
+        } else {
+            getOpenId({ code }).then(data => {
+                console.log(data)
+            })
         }
     },
     methods: {

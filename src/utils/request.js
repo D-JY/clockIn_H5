@@ -1,6 +1,7 @@
 import axios from 'axios'
 // import qs from 'query-string'
-import { message } from 'antd'
+import { Toast } from 'vant'
+import { devURL, proURL } from './const'
 
 let service = axios.create({
     headers: {
@@ -14,13 +15,13 @@ service.interceptors.request.use(config => {
     return config
   }, error => {
     // Do something with request error
-    message.error('发起请求异常，请稍候重试', '提示')
+    Toast.fail('发起请求异常，请稍候重试', '提示')
     console.log(error) // for debug
     Promise.reject(error)
 })
 
 export default function request(url, options) {
-    const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:80' : 'http://localhost:80'
+    const baseURL = process.env.NODE_ENV === 'development' ? devURL : proURL
     options.method = options.method ? options.method.toUpperCase() : 'GET'
     // if (options.method === 'GET' && options.params) {
     //   url = url + '?' + qs.stringify(options.params)
@@ -40,6 +41,6 @@ export default function request(url, options) {
         if (status === 401) {
             return Promise.resolve(data)
         }
-        message.error(JSON.stringify(err))
+        Toast.fail(JSON.stringify(err))
     })
   }

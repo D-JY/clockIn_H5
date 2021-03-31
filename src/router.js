@@ -23,6 +23,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
     const { meta: { title } = {} } = to
+    console.log(to)
     if (title) document.title = title
     next()
 })
