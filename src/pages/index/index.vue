@@ -9,7 +9,7 @@
 import dataForm from '@/components/dataForm'
 import { Button } from 'vant'
 import { getQueryString, getCode } from '../../utils'
-import { getOpenId } from '../../services/weixin'
+import { getWeixinUserInfo } from '../../services/weixin'
 export default {
     components: {
         dataForm,
@@ -44,8 +44,11 @@ export default {
             getCode()
             return
         } else {
-            getOpenId({ code }).then(data => {
+            getWeixinUserInfo({ code }).then(data => {
                 console.log(data)
+                if (data.success) {
+                    localStorage.setItem('token', data.token)
+                }
             })
         }
     },

@@ -1,7 +1,7 @@
 import request from '../utils/request'
 
-export function getOpenId(params) {
-    return request('/weixin/getOpenId', {
+export function getWeixinUserInfo(params) {
+    return request('/weixinApi/getWeixinUserInfo', {
         method: 'get',
         params
     })
