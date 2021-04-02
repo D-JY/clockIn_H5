@@ -13,7 +13,8 @@ function getQueryString(name) {
 function getCode(state = 0) {
     const { href } = window.location
     const uri = encodeURIComponent(href)
-    location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${uri}&response_type=code&scope=snsapi_userinfo&state=${state}#wechat_redirect`
+    // location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${uri}&response_type=code&scope=snsapi_userinfo&state=${state}#wechat_redirect`
+    location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${uri}&response_type=code&scope=snsapi_base&state=${state}#wechat_redirect`
 }
 
 export {
