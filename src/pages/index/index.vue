@@ -8,8 +8,8 @@
 <script>
 import dataForm from '@/components/dataForm'
 import { Button } from 'vant'
-import { getQueryString, getCode } from '../../utils'
-import { getWeixinUserInfo } from '../../services/weixin'
+import { userList } from '../../services/weixin'
+
 export default {
     components: {
         dataForm,
@@ -38,19 +38,8 @@ export default {
             allData: {}
         }
     },
-    beforeCreate() {
-        const code = getQueryString('code')
-        if (!code) {
-            getCode()
-            return
-        } else {
-            getWeixinUserInfo({ code }).then(data => {
-                console.log(data)
-                if (data.success) {
-                    localStorage.setItem('token', data.token)
-                }
-            })
-        }
+    mounted() {
+        this.getUserList()
     },
     methods: {
         getVal(val) {
@@ -59,6 +48,11 @@ export default {
         send() {
             this.$refs.dataForm.$refs.form.validate().then(() => {
                 console.log(this.allData)
+            })
+        },
+        getUserList() {
+            userList().then(data => {
+                console.log(data, 123)
             })
         }
     }
