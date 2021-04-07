@@ -1,5 +1,5 @@
 module.exports = {
-    devURL: 'http://dujunyan.vaiwan.com',//'http://localhost:80',
-    proURL: 'http://dujunyan.vaiwan.com',//'http://localhost:80',
+    devURL: 'http://localhost:80',//'http://dujunyan.vaiwan.com',
+    proURL: 'http://localhost:80',//'http://dujunyan.vaiwan.com',
     appid: 'wxde1dbe682d772f62'
 }

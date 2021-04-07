@@ -14,3 +14,11 @@ export function userList() {
         method: 'get'
     })
 }
+
+// 发送模板消息
+export function sendWeiXinMsg(params) {
+    return request('/weixin/sendWeiXinMsg', {
+        method: 'post',
+        data: params
+    })
+}

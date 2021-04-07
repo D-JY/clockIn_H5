@@ -7,8 +7,8 @@
 
 <script>
 import dataForm from '@/components/dataForm'
-import { Button } from 'vant'
-import { userList } from '../../services/weixin'
+import { Button, Toast } from 'vant'
+import { userList, sendWeiXinMsg } from '../../services/weixin'
 
 export default {
     components: {
@@ -19,10 +19,10 @@ export default {
         return {
             config: [
                 {
-                    key: 'receiveName',
+                    key: 'id',
                     type: 'select',
                     label: '接收人',
-                    options: [{ text: 'Mr.D', value: '5' }],
+                    options: [],
                     rules: [{ required: true, message: '请选择信息接收人' }]
                 },
                 {
@@ -47,12 +47,21 @@ export default {
         },
         send() {
             this.$refs.dataForm.$refs.form.validate().then(() => {
-                console.log(this.allData)
+                sendWeiXinMsg(this.allData).then(data => {
+                    Toast(data.message)
+                })
             })
         },
         getUserList() {
             userList().then(data => {
-                console.log(data, 123)
+                if (data.success) {
+                    const userList = data.data.map(val => {
+                        val.text = val.name
+                        val.value = val.id
+                        return val
+                    })
+                    this.$set(this.config[0], 'options', userList)
+                }
             })
         }
     }
